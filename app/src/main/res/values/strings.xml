@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Motorola assignment</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="user_fetch_request_failure">Fetch user request failure</string>
+</resources>
