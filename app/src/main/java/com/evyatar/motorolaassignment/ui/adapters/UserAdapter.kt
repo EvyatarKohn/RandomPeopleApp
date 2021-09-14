@@ -1,6 +1,7 @@
 package com.evyatar.motorolaassignment.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,7 +21,7 @@ class UserAdapter(
     }
 
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
-       holder.bind(userList[position].picture.large, userList[position].name.first, userList[position].name.last, userList[position].email, mainListener)
+       holder.bind(userList[position], mainListener)
     }
 
     override fun getItemCount() = userList.size
@@ -39,12 +40,16 @@ class UsersViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         mUserEmail = itemView.user_email
     }
 
-    fun bind(userPhoto: String, userName: String, userLastName: String, userEmail:String, mainListener: MainListener) {
-        UrlImageViewHelper.setUrlDrawable(mUserPhoto, userPhoto)
-        mUserName?.text = "$userName $userLastName"
-        mUserEmail?.text = userEmail
+    fun bind(result: Result, mainListener: MainListener) {
+        UrlImageViewHelper.setUrlDrawable(mUserPhoto, result.picture.large)
+        mUserName?.text = "${result.name.first} ${result.name.last}"
+        mUserEmail?.text = result.email
         itemView.setOnClickListener {
-            mainListener
+            mainListener.proceedToBDFragment(result)
+        }
+        itemView.setOnLongClickListener {
+            mainListener.proceedToEmailApp(result.email)
+            true
         }
     }
 }
