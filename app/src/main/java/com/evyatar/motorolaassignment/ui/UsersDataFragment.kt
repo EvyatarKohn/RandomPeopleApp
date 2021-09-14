@@ -3,6 +3,7 @@ package com.evyatar.motorolaassignment.ui
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.evyatar.motorolaassignment.MainListener
 import com.evyatar.motorolaassignment.MainViewModel
 import com.evyatar.motorolaassignment.R
+import com.evyatar.motorolaassignment.model.usersmodel.UsersData
 import com.evyatar.motorolaassignment.ui.adapters.UserAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.user_data_layout.*
@@ -53,12 +55,17 @@ class UsersDataFragment : Fragment() {
             fetchUsers()
             mSwipeRefresh.isRefreshing = false
         }
-
-        fetchUsers()
+        if (!(activity as MainActivity).mBackPressed) {
+            fetchUsers()
+        }
 
         mViewModel.userRepo.observe(viewLifecycleOwner, Observer { userData ->
             mLoaderLottie.visibility = View.GONE
-            mUserAdapter = UserAdapter(userData.results, mMainListener)
+            val sortedUsersList = userData.results.sortedBy { result ->
+                result.dob.age
+            }
+            mUserAdapter = UserAdapter(sortedUsersList, mMainListener)
+
             val layoutManager = LinearLayoutManager(activity?.applicationContext)
             user_recycler.layoutManager = layoutManager
             user_recycler.adapter = mUserAdapter

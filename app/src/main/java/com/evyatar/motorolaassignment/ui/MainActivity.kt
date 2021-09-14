@@ -16,6 +16,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity(), MainListener {
 
     private var mFirsTimeBack = true
+    var mBackPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 1) {
+            mBackPressed = true
             super.onBackPressed()
         } else {
             if (mFirsTimeBack) {
