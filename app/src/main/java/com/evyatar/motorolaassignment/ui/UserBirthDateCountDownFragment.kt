@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class UserBirtDateCountDownFragment : Fragment() {
+class UserBirthDateCountDownFragment : Fragment() {
     private lateinit var mMainListener: MainListener
     private lateinit var mUserPhoto: ImageView
     private lateinit var mUserName: TextView
@@ -28,7 +28,7 @@ class UserBirtDateCountDownFragment : Fragment() {
 
     companion object {
         fun newInstance(result: Result, mainListener: MainListener) =
-            UserBirtDateCountDownFragment().apply {
+            UserBirthDateCountDownFragment().apply {
                 mResult = result
                 mMainListener = mainListener
             }

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), MainListener {
     }
 
     override fun proceedToBDFragment(result: Result) {
-        showFragment(UserBirtDateCountDownFragment.newInstance(result, this), "BIRTH DATE FRAGMENT")
+        showFragment(UserBirthDateCountDownFragment.newInstance(result, this), "BIRTH DATE FRAGMENT")
     }
 
     override fun proceedToEmailApp(email: String) {
